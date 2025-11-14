@@ -34,7 +34,6 @@ export class CourseDetailComponent implements OnInit{
       next: (course) => {
         this.course = course;
         this.loading = false;
-        // Asegurar que la página esté en la parte superior después de cargar
         window.scrollTo(0, 0);
       },
       error: () => {
@@ -51,10 +50,8 @@ export class CourseDetailComponent implements OnInit{
     this.error = false;
     this.errorMessage = '';
     
-    // Recargar el curso para actualizar los cupos disponibles
     this.loadCourse(this.course.id);
     
-    // Limpiar el mensaje después de 5 segundos
     setTimeout(() => {
       this.successMessage = '';
     }, 5000);
@@ -63,7 +60,8 @@ export class CourseDetailComponent implements OnInit{
   onEnrollError(errorMessage: string): void {
     this.errorMessage = errorMessage;
     this.error = true;
-
+    window.scrollTo(0, 0);
+    
     setTimeout(() => {
       this.error = false;
       this.errorMessage = '';

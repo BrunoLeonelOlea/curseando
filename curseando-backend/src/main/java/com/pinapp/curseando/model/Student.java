@@ -1,6 +1,7 @@
 package com.pinapp.curseando.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,5 +31,6 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @JsonIgnore
     private List<Enrollment> enrollments = new ArrayList<>();
 }

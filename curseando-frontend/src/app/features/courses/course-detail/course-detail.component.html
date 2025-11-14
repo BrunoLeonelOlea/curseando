@@ -5,7 +5,7 @@
         <p>Cargando curso...</p>
     </div>
 
-    <div *ngIf="error && !loading" class="alert alert-error">
+    <div *ngIf="error && !loading" class="alert alert-error" role="alert">
         <p>{{ errorMessage || 'Error al cargar el curso' }}</p>
     </div>
 

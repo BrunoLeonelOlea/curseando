@@ -26,14 +26,13 @@ export class EnrollFormComponent {
         fullName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
       });
+      this.enrollForm.get('fullName')?.addValidators(Validators.minLength(3));
     }
 
   onSubmit(): void {
     if(this.enrollForm.invalid) {
       return;
     }
-
-    console.log('Lugares Disponibles:', this.availableSpots);
 
     if(this.availableSpots <= 0) {
       this.enrollmentError.emit('El curso no tiene cupos disponibles');
@@ -63,7 +62,8 @@ export class EnrollFormComponent {
       error: (error) => {
         this.isSubmitting = false;
         const errorMessage = error.error?.message || 'Error al inscribirse';
-        this.enrollmentError.emit(errorMessage);
+        const translatedMessage = this.translateErrorMessage(errorMessage);
+        this.enrollmentError.emit(translatedMessage);
       }
     })
   }
@@ -74,6 +74,19 @@ export class EnrollFormComponent {
 
   get email() {
     return this.enrollForm.get('email');
+  }
+
+  private translateErrorMessage(message: string): string {
+    const translations: { [key: string]: string } = {
+      'Course is full': 'El curso no tiene cupos disponibles',
+      'Student is already enrolled in this course': 'El estudiante ya está inscripto en este curso',
+      'The course was just updated by another user. Please try again.': 'El curso fue actualizado por otro usuario. Por favor, intenta nuevamente.',
+      'Full name is required': 'El nombre completo es requerido',
+      'Email is required': 'El email es requerido',
+      'Must be a well-formed email address': 'Debe ser una dirección de email válida'
+    };
+
+    return translations[message] || message;
   }
 
 }
