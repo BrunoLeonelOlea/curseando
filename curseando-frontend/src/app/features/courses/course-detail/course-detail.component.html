@@ -14,28 +14,43 @@
     </div>
 
     <div *ngIf="course && !loading" class="course-content">
-
-        <div class="course-header">
+        <div class="course-hero">
+            <div class="difficulty-badge" [ngClass]="'difficulty-' + course.difficulty.toLowerCase()">
+                {{course.difficulty}}
+            </div>
             <h1>{{course.title}}</h1>
             <div class="course-meta">
-                <span>Instructor: {{course.instructor}}</span>
-                <span>{{course.difficulty}}</span>
-                <span>Duración: {{course.duration}}</span>
+                <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span class="meta-text">{{course.instructor}}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">⏱️</span>
+                    <span class="meta-text">{{course.duration}}</span>
+                </div>
             </div>
         </div>
+
         <div class="course-description">
-            <h2>Descripción</h2>
             <p>{{course.description}}</p>
         </div>
 
         <div class="course-stats">
-            <div class="stat-card">
-                <span class="stat-label">Capacidad</span>
-                <span class="stat-value">{{course.capacity}}</span>
+            <div class="stat-card stat-card-primary">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <span class="stat-label">Cupos disponibles</span>
+                    <span class="stat-value">{{course.capacity - course.enrolledCount}}</span>
+                    <span class="stat-sublabel">de {{course.capacity}} totales</span>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Inscritos</span>
-                <span class="stat-value">{{course.enrolledCount}}</span>
+            <div class="stat-card stat-card-secondary">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <span class="stat-label">Estudiantes inscriptos</span>
+                    <span class="stat-value">{{course.enrolledCount}}</span>
+                    <span class="stat-sublabel">participando activamente</span>
+                </div>
             </div>
         </div>
 

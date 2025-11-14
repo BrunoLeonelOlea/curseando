@@ -44,7 +44,7 @@ export class CourseListComponent  implements OnInit {
 
   filterCourses() {
    if(this.selectedDifficulty === 'ALL') {
-    this.loadCourses();
+    this.filteredCourses = this.allCourses;
    } else {
     this.filteredCourses = 
       this.allCourses.filter(course => course.difficulty === this.selectedDifficulty) as Course[];

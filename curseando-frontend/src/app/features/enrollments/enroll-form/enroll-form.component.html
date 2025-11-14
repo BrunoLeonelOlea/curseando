@@ -45,9 +45,12 @@
             type="submit" 
             class="btn btn-primary"
             [disabled]="enrollForm.invalid || isSubmitting">
-                <span *ngIf="!isSubmitting">Inscribirse</span>
+                <span *ngIf="!isSubmitting">Inscribirse ahora</span>
                 <span *ngIf="isSubmitting">Procesando...</span>
             </button>
+            <div class="spots-info">
+                <strong>{{ availableSpots }}</strong> {{ availableSpots === 1 ? 'cupo disponible' : 'cupos disponibles' }}
+            </div>
         </div>
     </form>
 

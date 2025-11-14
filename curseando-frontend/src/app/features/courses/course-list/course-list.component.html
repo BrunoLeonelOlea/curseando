@@ -1,61 +1,92 @@
 <div class="container">
+    <div class="hero-section">
+        <h1 class="main-title">Curseando</h1>
+        <p class="subtitle">Descubre y aprende con nuestros cursos especializados</p>
+    </div>
+
     <div *ngIf="loading" class="loading">
         <div class="loading-spinner"></div>
-        Loading courses...
+        <p>Cargando cursos...</p>
     </div>
 
     <div *ngIf="error" class="error">
-        Error loading courses. Please try again.
+        <div class="error-icon">⚠️</div>
+        <p>Error al cargar los cursos. Por favor, intenta nuevamente.</p>
     </div>
 
-    <h1>Curseando</h1>
-
-    <div class="filter-section">
-        <div class="filter-buttons">
-            <button 
-            class="filter-btn" 
-            [class.active]="selectedDifficulty === 'ALL'" 
-            (click)="filterByDifficulty('ALL')">
-            All
-            </button>
-            <button 
-            class="filter-btn" 
-            [class.active] = "selectedDifficulty === 'BEGINNER'"
-            (click) = "filterByDifficulty(Difficulty.BEGINNER)" 
-            >
-            Beginner
-            </button>
-            <button 
-            class="filter-btn" 
-            [class.active] = "selectedDifficulty === 'INTERMEDIATE'" 
-            (click)="filterByDifficulty(Difficulty.INTERMEDIATE)">
-            Intermediate
-            </button>
-            <button 
-            class="filter-btn" 
-            [class.active] = "selectedDifficulty === 'ADVANCED'" 
-            (click)="filterByDifficulty(Difficulty.ADVANCED)">
-            Advanced
-            </button>
-        </div>
-
-    </div>
-
-    <div class="course-grid" *ngIf="!loading && !error">
-        <div 
-        class="course-card" 
-        *ngFor="let course of filteredCourses"
-        [routerLink]="['/courses', course.id]"
-        >
-            <div class="card-header">
-                <span class="difficuly">{{course.difficulty}}</span>
+    <div *ngIf="!loading && !error">
+        <div class="filter-section">
+            <div class="filter-header">
+                <span class="filter-label">Filtrar por dificultad:</span>
             </div>
-            <h2 class="course-title">{{course.title}}</h2>
-            <p class="instructor">{{course.instructor}}</p>
-            <p class="description">{{course.description}}</p>
-            <p class="duration">{{course.duration}}</p>
-            <p class="capacity">Enrolled: {{course.enrolledCount}}/{{course.capacity}}</p>
+            <div class="filter-buttons">
+                <button 
+                    class="filter-btn" 
+                    [class.active]="selectedDifficulty === 'ALL'" 
+                    (click)="filterByDifficulty('ALL')">
+                    <span>Todos</span>
+                </button>
+                <button 
+                    class="filter-btn" 
+                    [class.active]="selectedDifficulty === Difficulty.BEGINNER"
+                    (click)="filterByDifficulty(Difficulty.BEGINNER)">
+                    <span>Principiante</span>
+                </button>
+                <button 
+                    class="filter-btn" 
+                    [class.active]="selectedDifficulty === Difficulty.INTERMEDIATE" 
+                    (click)="filterByDifficulty(Difficulty.INTERMEDIATE)">
+                    <span>Intermedio</span>
+                </button>
+                <button 
+                    class="filter-btn" 
+                    [class.active]="selectedDifficulty === Difficulty.ADVANCED" 
+                    (click)="filterByDifficulty(Difficulty.ADVANCED)">
+                    <span>Avanzado</span>
+                </button>
+            </div>
         </div>
 
+        <div class="course-grid" *ngIf="filteredCourses.length > 0">
+            <div 
+                class="course-card" 
+                *ngFor="let course of filteredCourses"
+                [routerLink]="['/courses', course.id]"
+            >
+                <div class="card-header" [ngClass]="'difficulty-' + course.difficulty.toLowerCase()">
+                    <span class="difficulty-badge">{{course.difficulty}}</span>
+                </div>
+                <div class="card-body">
+                    <h2 class="course-title">{{course.title}}</h2>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">👤</span>
+                            <span class="meta-text">{{course.instructor}}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span class="meta-text">{{course.duration}}</span>
+                        </div>
+                    </div>
+                    <p class="description">{{course.description}}</p>
+                    <div class="course-footer">
+                        <div class="enrollment-info">
+                            <span class="enrollment-count">{{course.enrolledCount}}</span>
+                            <span class="enrollment-separator">/</span>
+                            <span class="enrollment-total">{{course.capacity}}</span>
+                            <span class="enrollment-label">inscritos</span>
+                        </div>
+                        <div class="available-spots" [ngClass]="{'low-spots': (course.capacity - course.enrolledCount) <= 5 && (course.capacity - course.enrolledCount) > 0, 'no-spots': (course.capacity - course.enrolledCount) === 0}">
+                            <span *ngIf="course.capacity - course.enrolledCount > 0">
+                                {{course.capacity - course.enrolledCount}} cupos disponibles
+                            </span>
+                            <span *ngIf="course.capacity - course.enrolledCount === 0" class="full-badge">
+                                Completo
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

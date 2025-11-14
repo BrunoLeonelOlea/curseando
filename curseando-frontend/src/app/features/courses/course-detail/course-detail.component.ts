@@ -34,6 +34,8 @@ export class CourseDetailComponent implements OnInit{
       next: (course) => {
         this.course = course;
         this.loading = false;
+        // Asegurar que la página esté en la parte superior después de cargar
+        window.scrollTo(0, 0);
       },
       error: () => {
         this.error = true;
