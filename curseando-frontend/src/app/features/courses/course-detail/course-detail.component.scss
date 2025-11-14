@@ -1,0 +1,143 @@
+.course-detail-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  
+    .btn-back {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      padding: 0.5rem 0;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+  
+    .alert {
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+
+      &.alert-error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+
+      &.alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  
+    .course-content {
+      .course-header {
+        margin-bottom: 2rem;
+  
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          color: #333;
+        }
+  
+        .course-meta {
+          display: flex;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+  
+          span {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+  
+            &.instructor {
+              background-color: #e9ecef;
+              color: #495057;
+            }
+  
+            &.difficulty {
+              font-weight: 600;
+  
+              &.difficulty-beginner {
+                background-color: #d4edda;
+                color: #155724;
+              }
+  
+              &.difficulty-intermediate {
+                background-color: #fff3cd;
+                color: #856404;
+              }
+  
+              &.difficulty-advanced {
+                background-color: #f8d7da;
+                color: #721c24;
+              }
+            }
+  
+            &.duration {
+              background-color: #d1ecf1;
+              color: #0c5460;
+            }
+          }
+        }
+      }
+  
+      .course-description {
+        margin-bottom: 2rem;
+  
+        h2 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: #333;
+        }
+  
+        p {
+          line-height: 1.6;
+          color: #555;
+        }
+      }
+  
+      .course-stats {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+  
+        .stat-card {
+          flex: 1;
+          background: #f8f9fa;
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+  
+          .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+          }
+  
+          .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+          }
+        }
+      }
+    }
+  }

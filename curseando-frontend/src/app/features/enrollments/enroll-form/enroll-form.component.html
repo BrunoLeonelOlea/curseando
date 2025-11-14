@@ -1,1 +1,54 @@
-<p>enroll-form works!</p>
+<div class="enroll-form-container">
+    <h3>Inscribirse al Curso</h3>
+
+    <div *ngIf="availableSpots <= 0" class="alert alert-warning">
+        <p>No hay cupos disponibles para este curso.</p>
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+    </div>
+
+    <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()" *ngIf="availableSpots > 0">
+        <div class="form-group">
+            <label for="fullName">Nombre Completo</label>
+            <input 
+                type="text" 
+                id="fullName" 
+                formControlName="fullName"
+                class="form-control"
+                [class.is-invalid]="fullName?.invalid && fullName?.touched"
+                placeholder="Ingresa tu nombre completo"
+            />
+            <div *ngIf="fullName?.invalid && fullName?.touched" class="invalid-feedback">
+                <div *ngIf="fullName?.errors?.['required']">Nombre completo es requerido</div>
+                <div *ngIf="fullName?.errors?.['minlength']">Nombre completo debe tener al menos 3 caracteres</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                formControlName="email" 
+                class="form-control"
+                [class.is-invalid]="email?.invalid && email?.touched"
+                placeholder="Ingresa tu email"
+            />
+            <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+                <div *ngIf="email?.errors?.['required']">Email es requerido</div>
+                <div *ngIf="email?.errors?.['email']">Email no es válido</div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button 
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="enrollForm.invalid || isSubmitting">
+                <span *ngIf="!isSubmitting">Inscribirse</span>
+                <span *ngIf="isSubmitting">Procesando...</span>
+            </button>
+        </div>
+    </form>
+
+</div>

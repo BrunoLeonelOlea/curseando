@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EnrollmentsRoutingModule } from './enrollments-routing.module';
 import { EnrollFormComponent } from './enroll-form/enroll-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,11 @@ import { EnrollFormComponent } from './enroll-form/enroll-form.component';
   ],
   imports: [
     CommonModule,
-    EnrollmentsRoutingModule
+    EnrollmentsRoutingModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    EnrollFormComponent
   ]
 })
 export class EnrollmentsModule { }

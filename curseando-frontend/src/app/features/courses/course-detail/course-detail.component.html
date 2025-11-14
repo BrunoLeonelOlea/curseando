@@ -1,1 +1,50 @@
-<p>course-detail works!</p>
+<div class="course-detail-container">
+    <button class="btn-back" [routerLink]="['/']">Volver a Cursos</button>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <p>Cargando curso...</p>
+    </div>
+
+    <div *ngIf="error && !loading" class="alert alert-error">
+        <p>{{ errorMessage || 'Error al cargar el curso' }}</p>
+    </div>
+
+    <div *ngIf="successMessage && !loading" class="alert alert-success">
+        <p><strong>✓ Éxito:</strong> {{ successMessage }}</p>
+    </div>
+
+    <div *ngIf="course && !loading" class="course-content">
+
+        <div class="course-header">
+            <h1>{{course.title}}</h1>
+            <div class="course-meta">
+                <span>Instructor: {{course.instructor}}</span>
+                <span>{{course.difficulty}}</span>
+                <span>Duración: {{course.duration}}</span>
+            </div>
+        </div>
+        <div class="course-description">
+            <h2>Descripción</h2>
+            <p>{{course.description}}</p>
+        </div>
+
+        <div class="course-stats">
+            <div class="stat-card">
+                <span class="stat-label">Capacidad</span>
+                <span class="stat-value">{{course.capacity}}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Inscritos</span>
+                <span class="stat-value">{{course.enrolledCount}}</span>
+            </div>
+        </div>
+
+        <app-enroll-form 
+            [courseId]="course.id" 
+            [availableSpots]="course.capacity - course.enrolledCount"
+            (enrollmentSuccess)="onEnrollSuccess()"
+            (enrollmentError)="onEnrollError($event)">
+        </app-enroll-form>
+    </div>
+
+</div>
