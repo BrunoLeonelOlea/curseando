@@ -1,0 +1,30 @@
+# === Java / Spring ===
+target/
+*.class
+*.jar
+*.war
+*.log
+*.iml
+
+# === Maven wrapper ===
+.mvn/
+mvnw
+mvnw.cmd
+
+# === IntelliJ ===
+.idea/
+*.iml
+
+# === VSCode ===
+.vscode/
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Angular ===
+node_modules/
+dist/
+.angular/
+npm-debug.log
+package-lock.json
